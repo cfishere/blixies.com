@@ -1,0 +1,56 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Category;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+
+class CategoryFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Category::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->sentence,
+            'desc' => $this->faker->paragraph,            
+        ];
+    }
+
+    public function active($bool = false)
+    {
+        return $this->state([
+            'active' => true
+        ]);
+    }
+
+    /**
+     * @param json $path 
+     */
+   
+    public function image_path( $path = null )
+    {
+        if(is_object($path) || is_array($path))
+        {
+            {
+                $path = json_encode($path);
+            }
+        }
+
+        return $this->state([
+            'image_path' => $path 
+        ]);
+    }      
+    
+}
